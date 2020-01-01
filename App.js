@@ -4,7 +4,7 @@ import { useScreens } from "react-native-screens";
 
 import * as Font from 'expo-font';
 import {AppLoading} from "expo";
-import MealsNavigator from "./navigation/MealsNavigator";
+import MealsFavTabNavigator from "./navigation/MealsNavigator";
 
 useScreens();
 
@@ -23,7 +23,7 @@ export default function App() {
     }
 
     return (
-        <MealsNavigator/>
+        <MealsFavTabNavigator />
     );
 }
 
