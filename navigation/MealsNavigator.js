@@ -33,6 +33,26 @@ const MealsNavigator = createStackNavigator({
     }
 });
 
+const FavoritesNavigator = createStackNavigator({
+    Favorites: {
+        screen: FavoritesScreen,
+        navigationOptions: {
+            headerTitle: 'Your Favorites!'
+        }
+    },
+    MealDetail: MealDetailScreen,
+
+}, {
+    mode: 'card',
+    transitionConfig: () => StackViewTransitionConfigs.SlideFromRightIOS,
+    defaultNavigationOptions: {
+        headerStyle: {
+            backgroundColor: Platform.OS === 'android' ? Colors.accentColor : '',
+        },
+        headerTintColor: Platform.OS === 'android' ? 'white' : Colors.accentColor
+    }
+});
+
 const tabScreen = {
     Meals: {
         screen: MealsNavigator,
@@ -44,7 +64,7 @@ const tabScreen = {
         }
     },
     Favorites: {
-        screen: FavoritesScreen,
+        screen: FavoritesNavigator,
         navigationOptions: {
             tabBarLabel: 'Favorites!',
             tabBarIcon: tabInfo => {
