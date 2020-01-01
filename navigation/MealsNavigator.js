@@ -1,4 +1,4 @@
-import { createStackNavigator } from "react-navigation-stack";
+import {createStackNavigator, StackViewTransitionConfigs} from "react-navigation-stack";
 import { createAppContainer } from 'react-navigation'
 
 import CategoriesScreen from "../screens/CategoriesScreen";
@@ -12,6 +12,9 @@ const MealsNavigator = createStackNavigator({
         screen: CategoryMealsScreen
     },
     MealDetail: MealDetailScreen,
+}, {
+    mode: 'card',
+    transitionConfig: () => StackViewTransitionConfigs.SlideFromRightIOS,
 });
 
 export default createAppContainer(MealsNavigator)
