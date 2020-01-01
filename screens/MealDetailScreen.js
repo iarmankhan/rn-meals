@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native'
 
 const MealDetailScreen = props => {
     return (
-        <View>
+        <View style={styles.screen}>
             <Text>MealDetailScreen</Text>
         </View>
     )
