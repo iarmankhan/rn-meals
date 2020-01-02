@@ -115,7 +115,7 @@ const MainNavigator = createDrawerNavigator({
             fontFamily: 'open-sans-bold',
             marginLeft: 0
         }
-    }
+    },
 });
 
 export default createAppContainer(MainNavigator)
