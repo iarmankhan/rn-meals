@@ -1,5 +1,8 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, TouchableNativeFeedback, Platform, ImageBackground} from "react-native";
+import DefaultText from "./DefaultText";
+import { Ionicons } from "@expo/vector-icons";
+import Colors from "../constants/Colors";
 
 const MealItem = props => {
     let TouchableCmp = TouchableOpacity;
@@ -25,9 +28,9 @@ const MealItem = props => {
                         </ImageBackground>
                     </View>
                     <View style={{...styles.mealRow, ...styles.mealDetail}}>
-                        <Text>{props.duration}m</Text>
-                        <Text>{props.complexity.toUpperCase()}</Text>
-                        <Text>{props.affordability.toUpperCase()}</Text>
+                        <DefaultText style={{color: Colors.accentColor}}><Ionicons name="ios-hourglass" size={15} color={Colors.accentColor} /> {props.duration}m</DefaultText>
+                        <DefaultText style={{color: Colors.accentColor}}><Ionicons name="ios-checkmark-circle-outline" size={15} color={Colors.accentColor} /> {props.complexity.toUpperCase()}</DefaultText>
+                        <DefaultText style={{color: Colors.accentColor}}><Ionicons name="ios-cash" size={15} color={Colors.accentColor} /> {props.affordability.toUpperCase()}</DefaultText>
                     </View>
                 </View>
             </TouchableCmp>
