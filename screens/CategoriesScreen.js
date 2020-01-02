@@ -1,15 +1,15 @@
 import React from 'react'
-import {View, Text, StyleSheet, FlatList} from 'react-native'
+import {StyleSheet, FlatList} from 'react-native'
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 
-import { CATEGORIES } from "../data/dummy-data";
+import {CATEGORIES} from "../data/dummy-data";
 import CategoryGridTile from "../components/CategoryGridTile";
 import CustomHeaderButton from '../components/HeaderButton'
 
 
 const CategoriesScreen = props => {
     const renderGridItem = (itemData) => {
-        return(
+        return (
             <CategoryGridTile
                 title={itemData.item.title}
                 color={itemData.item.color}
@@ -21,13 +21,12 @@ const CategoriesScreen = props => {
                         }
                     });
                 }}
-            />)
-
-
+            />
+        )
     };
 
     return (
-        <FlatList data={CATEGORIES} renderItem={renderGridItem} numColumns={2} />
+        <FlatList data={CATEGORIES} renderItem={renderGridItem} numColumns={2}/>
     )
 };
 
