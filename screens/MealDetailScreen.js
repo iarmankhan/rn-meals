@@ -42,17 +42,19 @@ const MealDetailScreen = props => {
     }, [isCurrentMealFavorite]);
 
     return (
-        <ScrollView>
-            <Image
-                source={{
-                    uri: selectedMeal.imageUrl
-                }}
-                style={styles.image}
-            />
-            <View style={styles.details}>
-                <DefaultText style={{color: Colors.accentColor}}><Ionicons name="ios-hourglass" size={15} color={Colors.accentColor} /> {selectedMeal.duration}m</DefaultText>
-                <DefaultText style={{color: Colors.accentColor}}><Ionicons name="ios-checkmark-circle-outline" size={15} color={Colors.accentColor} /> {selectedMeal.complexity.toUpperCase()}</DefaultText>
-                <DefaultText style={{color: Colors.accentColor}}><Ionicons name="ios-cash" size={15} color={Colors.accentColor} /> {selectedMeal.affordability.toUpperCase()}</DefaultText>
+        <ScrollView stickyHeaderIndices={[0]}>
+            <View>
+                <Image
+                    source={{
+                        uri: selectedMeal.imageUrl
+                    }}
+                    style={styles.image}
+                />
+                <View style={styles.details}>
+                    <DefaultText style={{color: Colors.accentColor}}><Ionicons name="ios-hourglass" size={15} color={Colors.accentColor} /> {selectedMeal.duration}m</DefaultText>
+                    <DefaultText style={{color: Colors.accentColor}}><Ionicons name="ios-checkmark-circle-outline" size={15} color={Colors.accentColor} /> {selectedMeal.complexity.toUpperCase()}</DefaultText>
+                    <DefaultText style={{color: Colors.accentColor}}><Ionicons name="ios-cash" size={15} color={Colors.accentColor} /> {selectedMeal.affordability.toUpperCase()}</DefaultText>
+                </View>
             </View>
             <Text style={styles.title}>Ingredients</Text>
             {selectedMeal.ingredients.map(ingredient => <ListItem key={ingredient}>{ingredient}</ListItem>)}
@@ -88,6 +90,7 @@ const styles = StyleSheet.create({
     },
     details: {
         flexDirection: 'row',
+        backgroundColor: 'white',
         padding: 15,
         justifyContent: 'space-around'
     },
