@@ -85,8 +85,28 @@ const MealsFavTabNavigator = Platform.OS === 'android'
 
 // Drawer navigator
 const MainNavigator = createDrawerNavigator({
-    MealsFav: MealsFavTabNavigator,
-    Filters: FiltersNavigator
+    MealsFav: {
+        screen: MealsFavTabNavigator,
+        navigationOptions: {
+            drawerLabel: 'Favorite Meals!',
+            drawerIcon: <Ionicons name="ios-star-outline" size={24} color={Colors.accentColor} />
+        }
+    },
+    Filters: {
+        screen: FiltersNavigator,
+        navigationOptions: {
+            drawerLabel: 'Filter Meals!',
+            drawerIcon: <Ionicons name="ios-cog" size={24} color={Colors.accentColor} />
+        }
+    }
+}, {
+    contentOptions: {
+        activeTintColor: Colors.accentColor,
+        labelStyle: {
+            fontFamily: 'open-sans-bold',
+            marginLeft: 0
+        }
+    }
 });
 
 export default createAppContainer(MainNavigator)
