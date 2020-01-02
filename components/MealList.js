@@ -1,9 +1,13 @@
 import React from "react";
+import {useSelector} from "react-redux";
 import {FlatList, View, StyleSheet} from "react-native";
 import MealItem from "./MealItem";
 
 const MealList = props => {
+    const favoriteMeals = useSelector(state => state.meals.favoriteMeals);
+
     const renderMealItem = itemData => {
+        const isFavorite = favoriteMeals.some(meal => meal.id === itemData.item.id);
         return (
             <MealItem
                 image={itemData.item.imageUrl}
@@ -17,6 +21,7 @@ const MealList = props => {
                         params: {
                             mealId: itemData.item.id,
                             title: itemData.item.title,
+                            isFav: isFavorite,
                         }
                     });
                 }}
