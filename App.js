@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import { useScreens } from "react-native-screens";
+import {createStore, combineReducers} from "redux";
+import {Provider} from "react-redux";
 
 import * as Font from 'expo-font';
 import {AppLoading} from "expo";
 import MealsFavTabNavigator from "./navigation/MealsNavigator";
+import mealsReducer from "./store/reducers/meals";
 
 useScreens();
+
+const rootReducers = combineReducers({
+   meals: mealsReducer,
+});
+
+const store = createStore(rootReducers);
 
 const fetchFonts = () => {
     return Font.loadAsync({
@@ -23,7 +32,9 @@ export default function App() {
     }
 
     return (
-        <MealsFavTabNavigator />
+        <Provider store={store}>
+            <MealsFavTabNavigator />
+        </Provider>
     );
 }
 
