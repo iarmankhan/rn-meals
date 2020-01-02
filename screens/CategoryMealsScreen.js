@@ -2,12 +2,9 @@ import React from 'react'
 import {StyleSheet} from 'react-native'
 
 import {CATEGORIES, MEALS} from "../data/dummy-data";
-import MealItem from "../components/MealItem";
 import MealList from "../components/MealList";
 
 const CategoryMealsScreen = props => {
-
-
     const catId = props.navigation.getParam('categoryId');
     const displayedMeals = MEALS.filter(
         meal => meal.categoryIds.indexOf(catId) >= 0

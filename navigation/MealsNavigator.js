@@ -1,62 +1,60 @@
-import { createAppContainer } from 'react-navigation';
-import {createStackNavigator, StackViewTransitionConfigs} from "react-navigation-stack";
-import {createBottomTabNavigator} from "react-navigation-tabs";
+import React from "react";
 import {Platform} from "react-native";
 import {Ionicons} from "@expo/vector-icons";
-import {createMaterialBottomTabNavigator} from "react-navigation-material-bottom-tabs";
+
+import { createAppContainer } from 'react-navigation';
+import {createStackNavigator, StackViewTransitionConfigs} from "react-navigation-stack";
+import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
+import {createBottomTabNavigator} from "react-navigation-tabs";
+import { createDrawerNavigator } from 'react-navigation-drawer';
 
 import CategoriesScreen from "../screens/CategoriesScreen";
 import CategoryMealsScreen from "../screens/CategoryMealsScreen";
 import MealDetailScreen from "../screens/MealDetailScreen";
-import Colors from "../constants/Colors";
 import FavoritesScreen from "../screens/FavoritesScreen";
-import React from "react";
+import FiltersScreen from "../screens/FiltersScreen";
+import Colors from "../constants/Colors";
 
-const MealsNavigator = createStackNavigator({
-    Categories: {
-        screen: CategoriesScreen,
-        navigationOptions: {
-            headerTitle: 'Meal Categories'
+// Custom options for stack navigator
+const stackCustomOption = color => {
+    return {
+        mode: 'card',
+        transitionConfig: () => StackViewTransitionConfigs.SlideFromRightIOS,
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: Platform.OS === 'android' ? color : '',
+            },
+            headerTintColor: Platform.OS === 'android' ? 'white' : color
         }
-    },
+    }
+};
+
+// Stack navigators - Start
+const MealsNavigator = createStackNavigator({
+    Categories: CategoriesScreen,
     CategoryMeals:CategoryMealsScreen,
     MealDetail: MealDetailScreen,
-
-}, {
-    mode: 'card',
-    transitionConfig: () => StackViewTransitionConfigs.SlideFromRightIOS,
-    defaultNavigationOptions: {
-        headerStyle: {
-            backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : '',
-        },
-        headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor
-    }
-});
+}, stackCustomOption(Colors.primaryColor));
 
 const FavoritesNavigator = createStackNavigator({
-    Favorites: {
-        screen: FavoritesScreen,
-        navigationOptions: {
-            headerTitle: 'Your Favorites!'
-        }
-    },
+    Favorites: FavoritesScreen,
     MealDetail: MealDetailScreen,
 
-}, {
-    mode: 'card',
-    transitionConfig: () => StackViewTransitionConfigs.SlideFromRightIOS,
-    defaultNavigationOptions: {
-        headerStyle: {
-            backgroundColor: Platform.OS === 'android' ? Colors.accentColor : '',
-        },
-        headerTintColor: Platform.OS === 'android' ? 'white' : Colors.accentColor
-    }
-});
+}, stackCustomOption(Colors.accentColor));
 
+const FiltersNavigator = createStackNavigator({
+    Filters: FiltersScreen,
+}, stackCustomOption(Colors.primaryColor));
+
+// -- Stack Navigators End
+
+
+// Tab Navigator
 const tabScreen = {
     Meals: {
         screen: MealsNavigator,
         navigationOptions: {
+            tabBarLabel: 'Meals',
             tabBarIcon: tabInfo => {
                 return <Ionicons name='ios-restaurant' size={25} color={tabInfo.tintColor}/>
             },
@@ -85,4 +83,10 @@ const MealsFavTabNavigator = Platform.OS === 'android'
     }
 });
 
-export default createAppContainer(MealsFavTabNavigator)
+// Drawer navigator
+const MainNavigator = createDrawerNavigator({
+    MealsFav: MealsFavTabNavigator,
+    Filters: FiltersNavigator
+});
+
+export default createAppContainer(MainNavigator)
